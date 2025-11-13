@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+  <h2>{{ object }}</h2>
+  <ul class="list-group">
+    <li class="list-group-item"><strong>Documento:</strong> {{ object.documento }}</li>
+    <li class="list-group-item"><strong>Email:</strong> {{ object.email }}</li>
+    <li class="list-group-item"><strong>Fecha Nac:</strong> {{ object.fecha_nacimiento }}</li>
+    <li class="list-group-item"><strong>Activo:</strong> {{ object.activo }}</li>
+  </ul>
+  <a class="btn btn-secondary mt-3" href="{% url 'estudiante_list' %}">Volver</a>
+{% endblock %}

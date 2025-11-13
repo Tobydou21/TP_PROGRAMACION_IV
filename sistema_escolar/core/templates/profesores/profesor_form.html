@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow border-0">
+  <div class="card-header bg-primary text-white">
+    <h5 class="mb-0">{{ view.object|default:"Nuevo Profesor" }}</h5>
+  </div>
+  <div class="card-body">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="btn btn-primary" type="submit">Guardar</button>
+      <a class="btn btn-secondary" href="{% url 'profesor_list' %}">Cancelar</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow border-0">
+  <div class="card-body text-center">
+    <h5>¿Seguro que querés eliminar al profesor <strong>{{ object.nombre }}</strong>?</h5>
+    <form method="post">{% csrf_token %}
+      <button class="btn btn-danger" type="submit">Sí, borrar</button>
+      <a class="btn btn-secondary" href="{% url 'profesor_list' %}">Cancelar</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <h2><i class="bi bi-journal-text"></i> Listado de Cursos</h2>
+        </div>
+        <div class="col-md-6 text-md-end">
+            <a class="btn btn-success" href="{% url 'curso_add' %}">
+                <i class="bi bi-plus-circle"></i> Nuevo Curso
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="GET" action="{% url 'curso_list' %}">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="q" 
+                           placeholder="Buscar por código, nombre o profesor..." 
+                           value="{{ request.GET.q }}">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="bi bi-search"></i> Buscar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="table-responsive shadow-sm">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Profesor</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for c in object_list %}
+                <tr>
+                    <td><span class="badge bg-secondary">{{ c.codigo }}</span></td>
+                    <td>{{ c.nombre }}</td>
+                    <td>
+                        {% if c.profesor %}
+                            {{ c.profesor.nombre }} {{ c.profesor.apellido }}
+                        {% else %}
+                            <span class="text-muted">Sin asignar</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {{ c.descripcion|default:"N/A"|truncatechars:40 }}
+                    </td>
+                    <td>
+                        <a class="btn btn-sm btn-info" href="{% url 'curso_detail' c.pk %}" title="Ver">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <a class="btn btn-sm btn-warning" href="{% url 'curso_edit' c.pk %}" title="Editar">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a class="btn btn-sm btn-danger" href="{% url 'curso_delete' c.pk %}" title="Borrar">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center">No hay cursos registrados o no coinciden con la búsqueda.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

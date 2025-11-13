@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Sistema Escolar{% endblock %}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        /* Estilos base */
+        body {
+            background-color: #f4f6f9;
+            font-family: "Segoe UI", sans-serif;
+            margin: 0; 
+            padding: 0;
+            display: flex; /* Necesario para el layout de página completa */
+            min-height: 100vh;
+        }
+        
+        /* Estilo para la BARRA LATERAL (SIDEBAR) */
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0; 
+            background-color: #2c3e50; /* Color oscuro tipo Dashboard */
+            color: white;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.15);
+            /* Para que el sidebar ocupe toda la altura visible */
+            position: sticky;
+            top: 0;
+            padding-top: 20px;
+        }
+
+        /* Estilo para el CONTENIDO PRINCIPAL */
+        .content-wrapper {
+            flex-grow: 1; /* Ocupa el espacio restante */
+            padding: 20px;
+            padding-bottom: 70px; /* Espacio para el footer */
+            position: relative;
+        }
+
+        /* Estilos de navegación del sidebar */
+        .sidebar .nav-link {
+            color: #bdc3c7;
+            padding: 12px 15px;
+            margin: 5px 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .sidebar .nav-link:hover, .sidebar .nav-link.active {
+            background-color: #34495e; /* Un tono más claro al pasar el mouse */
+            color: white;
+            border-left: 4px solid #3498db; /* Barra azul de acento */
+        }
+        .sidebar .navbar-brand {
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        /* Estilos de pie de página (footer) */
+        .app-footer {
+            position: absolute;
+            bottom: 0;
+            width: calc(100% - 40px);
+            background-color: #fff;
+            color: #2c3e50;
+            padding: 10px 0;
+            text-align: center;
+            border-top: 1px solid #ddd;
+        }
+        
+        /* Ajuste para el botón de Logout */
+        .sidebar .logout-btn {
+            background-color: #e74c3c;
+            border-color: #e74c3c;
+        }
+        .sidebar .logout-btn:hover {
+            background-color: #c0392b;
+            border-color: #c0392b;
+        }
+    </style>
+    <style>
+    /* ... Tus estilos actuales (body, sidebar, etc.) están aquí arriba ... */
+
+    /* Reglas para móviles (pantallas de 768px o menos) */
+    @media (max-width: 768px) {
+        /* 1. La barra lateral desaparece */
+        .sidebar {
+            display: none; 
+            /* Para que si usas JavaScript, se pueda mostrar como menú hamburguesa */
+            position: fixed; 
+            z-index: 1000; /* Asegura que esté por encima de todo */
+        }
+        
+        /* 2. El contenedor principal ocupa el 100% del ancho */
+        body {
+            display: block; /* Desactiva el display:flex que causa el problema */
+        }
+
+        .content-wrapper {
+            width: 100%; /* Ocupa todo el ancho disponible */
+            margin-left: 0; /* No deja margen a la izquierda */
+            padding-left: 15px; /* Pequeño padding para el contenido */
+            padding-right: 15px;
+        }
+
+        /* 3. El contenedor de contenido se ajusta */
+        .container {
+            width: 100% !important; 
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        /* 4. Las tablas (si no tienen table-responsive) se ajustan forzando el scroll */
+        table {
+            width: 100%;
+            display: block;
+            overflow-x: auto;
+        }
+    }
+</style>
+</head>
+
+<body>
+    
+    <div class="sidebar d-flex flex-column">
+        <div class="p-3 text-center">
+            <a class="navbar-brand fw-bold" href="{% url 'home' %}">
+                <i class="bi bi-mortarboard-fill me-2"></i> ESCOLAR
+            </a>
+            <hr class="text-white">
+        </div>
+
+        <ul class="nav flex-column mb-auto px-2">
+            <li class="nav-item">
+                <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">
+                    <i class="bi bi-house-door-fill me-2"></i> Inicio
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link {% if 'estudiantes' in request.path %}active{% endif %}" href="{% url 'estudiante_list' %}">
+                        <i class="bi bi-people-fill me-2"></i> Estudiantes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if 'cursos' in request.path %}active{% endif %}" href="{% url 'curso_list' %}">
+                        <i class="bi bi-journal-text me-2"></i> Cursos
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if 'profesores' in request.path %}active{% endif %}" href="{% url 'profesor_list' %}">
+                        <i class="bi bi-person-badge me-2"></i> Profesores
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+
+        <div class="user-info p-3 mt-auto border-top border-secondary">
+            {% if user.is_authenticated %}
+                <div class="d-flex align-items-center text-white mb-2">
+                    <i class="bi bi-person-circle fs-4 me-2"></i>
+                    <span class="fw-bold">{{ user.username }}</span>
+                </div>
+                <form method="POST" action="{% url 'logout' %}" class="d-inline w-100">
+                    {% csrf_token %} 
+                    <button type="submit" class="btn logout-btn btn-sm w-100">
+                        <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                    </button>
+                </form>
+            {% else %}
+                <a class="btn btn-outline-light btn-sm w-100" href="{% url 'login' %}">
+                    <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
+                </a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="content-wrapper">
+        <main class="pb-5">
+            {% block content %}
+            {% endblock %}
+        </main>
+        
+        <footer class="app-footer text-muted">
+            Sistema Escolar © 2025. Desarrollado con Django y Bootstrap.
+        </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
