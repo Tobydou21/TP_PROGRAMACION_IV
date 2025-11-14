@@ -348,8 +348,8 @@ python manage.py migrate
 
 Proyecto de TP (Trabajo Práctico) para materia de Programación IV.
 
-**Autor**: Tobydou21  
-**Fecha**: Noviembre 2025  
+**Autores**: Tobias Ramirez, Hugo Ayala, Cesar Palacion, Ethien Palau, Nilson Casco.  
+**Feche**: Noviembre 2025  
 **Licencia**: MIT
 
 ---
