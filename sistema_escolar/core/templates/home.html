@@ -15,7 +15,74 @@
             <a class="btn btn-secondary btn-lg" href="{% url 'curso_list' %}" role="button">
                 <i class="bi bi-journal-text"></i> Ver Cursos
             </a>
+            <a class="btn btn-info btn-lg" href="{% url 'profesor_list' %}" role="button">
+                <i class="bi bi-person-badge-fill"></i> Ver Profesores
+            </a>
         </div>
     </div>
+    {% if recent_students %}
+    <div class="row g-3">
+        <div class="col-12">
+            <h4 class="mb-3">Últimos Estudiantes</h4>
+        </div>
+        {% for s in recent_students %}
+        <div class="col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ s.nombre }} {{ s.apellido }}</h5>
+                    <p class="card-text mb-1"><strong>Fecha Nac.:</strong> {{ s.fecha_nacimiento|date:"d/m/Y"|default:"—" }}</p>
+                    <p class="card-text"><strong>Activo:</strong> {% if s.activo %}<span class="badge bg-success">Sí</span>{% else %}<span class="badge bg-secondary">No</span>{% endif %}</p>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a href="{% url 'estudiante_detail' s.pk %}" class="btn btn-sm btn-outline-primary">Ver ficha</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if recent_courses %}
+    <div class="row g-3 mt-4">
+        <div class="col-12">
+            <h4 class="mb-3">Últimos Cursos</h4>
+        </div>
+        {% for c in recent_courses %}
+        <div class="col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ c.nombre }}</h5>
+                    <p class="card-text mb-1"><strong>Código:</strong> {{ c.codigo }}</p>
+                    <p class="card-text"><strong>Profesor:</strong> {{ c.profesor.nombre }} {{ c.profesor.apellido|default:"—" }}</p>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a href="{% url 'curso_detail' c.pk %}" class="btn btn-sm btn-outline-secondary">Ver curso</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if recent_professors %}
+    <div class="row g-3 mt-4">
+        <div class="col-12">
+            <h4 class="mb-3">Últimos Profesores</h4>
+        </div>
+        {% for p in recent_professors %}
+        <div class="col-sm-6 col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ p.nombre }} {{ p.apellido }}</h5>
+                    <p class="card-text"><strong>Email:</strong> {{ p.email|default:"—" }}</p>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a href="{% url 'profesor_detail' p.pk %}" class="btn btn-sm btn-outline-info">Ver perfil</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Fondo degradado -->
+  <defs>
+    <linearGradient id="gradientBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradientAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f39c12;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e67e22;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Círculo de fondo -->
+  <circle cx="100" cy="100" r="95" fill="url(#gradientBg)" />
+  
+  <!-- Gorro académico (mortarboard) -->
+  <g id="mortarboard">
+    <!-- Base del gorro (cuadrado) -->
+    <rect x="50" y="70" width="100" height="8" rx="2" fill="white" opacity="0.9"/>
+    
+    <!-- Líneas del cuadrado del gorro -->
+    <line x1="60" y1="70" x2="60" y2="78" stroke="white" stroke-width="2" opacity="0.7"/>
+    <line x1="70" y1="70" x2="70" y2="78" stroke="white" stroke-width="2" opacity="0.7"/>
+    <line x1="80" y1="70" x2="80" y2="78" stroke="white" stroke-width="2" opacity="0.7"/>
+    <line x1="90" y1="70" x2="90" y2="78" stroke="white" stroke-width="2" opacity="0.7"/>
+    <line x1="100" y1="70" x2="100" y2="78" stroke="white" stroke-width="2" opacity="0.7"/>
+    <line x1="110" y1="70" x2="110" y2="78" stroke="white" stroke-width="2" opacity="0.7"/>
+    <line x1="120" y1="70" x2="120" y2="78" stroke="white" stroke-width="2" opacity="0.7"/>
+    <line x1="130" y1="70" x2="130" y2="78" stroke="white" stroke-width="2" opacity="0.7"/>
+    <line x1="140" y1="70" x2="140" y2="78" stroke="white" stroke-width="2" opacity="0.7"/>
+    
+    <!-- Borla del gorro (cono) -->
+    <circle cx="100" cy="65" r="6" fill="url(#gradientAccent)" />
+    <line x1="100" y1="71" x2="100" y2="90" stroke="url(#gradientAccent)" stroke-width="2" opacity="0.8"/>
+    
+    <!-- Pequeña bola al final de la borla -->
+    <circle cx="100" cy="95" r="4" fill="url(#gradientAccent)" />
+  </g>
+
+  <!-- Libro abierto debajo del gorro -->
+  <g id="book">
+    <!-- Lomo del libro (línea central) -->
+    <line x1="100" y1="100" x2="100" y2="145" stroke="white" stroke-width="3" opacity="0.8"/>
+    
+    <!-- Página izquierda -->
+    <path d="M 100 105 Q 75 108 65 130 L 65 145 Q 75 140 100 145 Z" fill="white" opacity="0.75"/>
+    
+    <!-- Página derecha -->
+    <path d="M 100 105 Q 125 108 135 130 L 135 145 Q 125 140 100 145 Z" fill="white" opacity="0.9"/>
+    
+    <!-- Líneas de texto en el libro (izquierda) -->
+    <line x1="70" y1="115" x2="95" y2="115" stroke="#3498db" stroke-width="1.5" opacity="0.6"/>
+    <line x1="70" y1="122" x2="90" y2="122" stroke="#3498db" stroke-width="1.5" opacity="0.6"/>
+    <line x1="70" y1="129" x2="95" y2="129" stroke="#3498db" stroke-width="1.5" opacity="0.6"/>
+    
+    <!-- Líneas de texto en el libro (derecha) -->
+    <line x1="105" y1="115" x2="130" y2="115" stroke="#3498db" stroke-width="1.5" opacity="0.6"/>
+    <line x1="110" y1="122" x2="130" y2="122" stroke="#3498db" stroke-width="1.5" opacity="0.6"/>
+    <line x1="105" y1="129" x2="130" y2="129" stroke="#3498db" stroke-width="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- Símbolo de aprendizaje (estrella pequeña de acento) -->
+  <g id="accent-stars">
+    <!-- Estrella arriba a la derecha -->
+    <polygon points="155,55 158,62 165,62 159,67 162,74 155,69 148,74 151,67 145,62 152,62" fill="url(#gradientAccent)" opacity="0.85"/>
+    
+    <!-- Estrella arriba a la izquierda (más pequeña) -->
+    <polygon points="45,60 47,65 52,65 48,68 50,73 45,70 40,73 42,68 38,65 43,65" fill="url(#gradientAccent)" opacity="0.7"/>
+  </g>
+
+  <!-- Texto "ESCOLAR" abajo -->
+  <text x="100" y="170" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="2">
+    ESCOLAR
+  </text>
+</svg>
