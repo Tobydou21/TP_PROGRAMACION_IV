@@ -1,0 +1,11 @@
+# Archivos de Python/Django generados automáticamente
+*.pyc
+__pycache__/
+.venv/ # Ignorar el entorno virtual si está en esta carpeta
+db.sqlite3 # Ignorar la base de datos de SQLite
+/db # Ignorar si es un directorio, aunque tu git status lo muestra como archivo
+
+# Archivos de entorno y logs
+.env
+.DS_Store
+*.log

@@ -17,12 +17,15 @@ urlpatterns = [
     path('cursos/<int:pk>/', views.CursoDetailView.as_view(), name='curso_detail'),
     path('cursos/<int:pk>/edit/', views.CursoUpdateView.as_view(), name='curso_edit'),
     path('cursos/<int:pk>/delete/', views.CursoDeleteView.as_view(), name='curso_delete'),
+    
+    # AÑADIDO: URL para Matricular alumnos
+    path('cursos/<int:pk>/matricular/', views.MatriculaCreateView.as_view(), name='curso_matricular'),
 
     # Profesores
- path('profesores/', views.ProfesorListView.as_view(), name='profesor_list'),
- path('profesores/<int:pk>/', views.ProfesorDetailView.as_view(), name='profesor_detail'),
- path('profesores/nuevo/', views.ProfesorCreateView.as_view(), name='profesor_add'),
- path('profesores/<int:pk>/editar/', views.ProfesorUpdateView.as_view(), name='profesor_edit'),
- path('profesores/<int:pk>/borrar/', views.ProfesorDeleteView.as_view(), name='profesor_delete'),
+    path('profesores/', views.ProfesorListView.as_view(), name='profesor_list'),
+    path('profesores/<int:pk>/', views.ProfesorDetailView.as_view(), name='profesor_detail'),
+    # CORREGIDO: Se elimina el 'as_as_view' extra
+    path('profesores/nuevo/', views.ProfesorCreateView.as_view(), name='profesor_add'), 
+    path('profesores/<int:pk>/editar/', views.ProfesorUpdateView.as_view(), name='profesor_edit'),
+    path('profesores/<int:pk>/borrar/', views.ProfesorDeleteView.as_view(), name='profesor_delete'),
 ]
-   

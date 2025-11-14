@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Detalle de Profesor{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0"><i class="bi bi-person-badge me-2"></i> {{ object.apellido }}, {{ object.nombre }}</h2>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title text-muted mb-3">Información del Contacto</h5>
+            
+            <ul class="list-group list-group-flush mb-4">
+                <li class="list-group-item">
+                    <strong>Email:</strong> {{ object.email|default:"No registrado" }}
+                </li>
+            </ul>
+
+            <h5 class="card-title text-muted mb-3 mt-4">Cursos Asignados ({{ object.curso_set.count }})</h5>
+            
+            {% if object.curso_set.all %}
+            <ul class="list-group list-group-flush">
+                {% for curso in object.curso_set.all %}
+                <li class="list-group-item">
+                    <a href="{% url 'curso_detail' curso.pk %}">{{ curso.codigo }} - {{ curso.nombre }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="text-muted">Este profesor no tiene cursos asignados.</p>
+            {% endif %}
+
+            <div class="d-flex justify-content-end mt-4">
+                <a class="btn btn-warning me-2" href="{% url 'profesor_edit' object.pk %}">
+                    <i class="bi bi-pencil"></i> Editar
+                </a>
+                <a class="btn btn-secondary" href="{% url 'profesor_list' %}">
+                    <i class="bi bi-arrow-left"></i> Volver a la Lista
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

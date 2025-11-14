@@ -1,40 +1,40 @@
 {% extends "base.html" %}
+{% block title %}Lista de Profesores{% endblock %}
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-  <h2 class="fw-bold text-primary"><i class="bi bi-person-badge"></i> Profesores</h2>
-  <a class="btn btn-success shadow-sm" href="{% url 'profesor_add' %}">
-    <i class="bi bi-plus-lg"></i> Nuevo Profesor
-  </a>
-</div>
-
-<div class="card shadow border-0">
-  <div class="card-body p-0">
-    <table class="table table-hover align-middle mb-0">
-      <thead class="table-primary text-center">
-        <tr>
-          <th>#</th>
-          <th>Nombre</th>
-          <th>Email</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody class="text-center">
-        {% for p in object_list %}
-        <tr>
-          <td>{{ forloop.counter }}</td>
-          <td>{{ p.nombre }}</td>
-          <td>{{ p.email }}</td>
-          <td>
-            <a class="btn btn-sm btn-outline-primary" href="{% url 'profesor_detail' p.pk %}" title="Ver"><i class="bi bi-eye"></i></a>
-            <a class="btn btn-sm btn-outline-secondary" href="{% url 'profesor_edit' p.pk %}" title="Editar"><i class="bi bi-pencil"></i></a>
-            <a class="btn btn-sm btn-outline-danger" href="{% url 'profesor_delete' p.pk %}" title="Borrar"><i class="bi bi-trash"></i></a>
-          </td>
-        </tr>
-        {% empty %}
-        <tr><td colspan="4" class="text-muted py-3">No hay profesores registrados.</td></tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+        <h4 class="mb-0"><i class="bi bi-person-badge me-2"></i>Gestión de Profesores</h4>
+        <a href="{% url 'profesor_add' %}" class="btn btn-success">
+            <i class="bi bi-plus-lg me-1"></i> Agregar Profesor
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th> <th>Email</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for profesor in object_list %}
+                    <tr>
+                        <td>{{ profesor.nombre }}</td>
+                        <td>{{ profesor.apellido }}</td> <td>{{ profesor.email }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'profesor_detail' profesor.pk %}" class="btn btn-info btn-sm" title="Ver"><i class="bi bi-eye-fill"></i></a>
+                            <a href="{% url 'profesor_edit' profesor.pk %}" class="btn btn-warning btn-sm" title="Editar"><i class="bi bi-pencil-fill"></i></a>
+                            <a href="{% url 'profesor_delete' profesor.pk %}" class="btn btn-danger btn-sm" title="Eliminar"><i class="bi bi-trash3-fill"></i></a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4" class="text-center text-muted">No se encontraron profesores.</td></tr> 
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 {% endblock %}

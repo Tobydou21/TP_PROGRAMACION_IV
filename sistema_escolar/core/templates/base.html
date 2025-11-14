@@ -131,31 +131,30 @@
             </a>
             <hr class="text-white">
         </div>
-
-        <ul class="nav flex-column mb-auto px-2">
-            <li class="nav-item">
-                <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">
-                    <i class="bi bi-house-door-fill me-2"></i> Inicio
-                </a>
-            </li>
-            {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link {% if 'estudiantes' in request.path %}active{% endif %}" href="{% url 'estudiante_list' %}">
-                        <i class="bi bi-people-fill me-2"></i> Estudiantes
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if 'cursos' in request.path %}active{% endif %}" href="{% url 'curso_list' %}">
-                        <i class="bi bi-journal-text me-2"></i> Cursos
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if 'profesores' in request.path %}active{% endif %}" href="{% url 'profesor_list' %}">
-                        <i class="bi bi-person-badge me-2"></i> Profesores
-                    </a>
-                </li>
-            {% endif %}
-        </ul>
+<ul class="nav flex-column mb-auto">
+    <li class="nav-item">
+        <a class="nav-link text-white active" aria-current="page" href="{% url 'home' %}">
+            <i class="bi bi-house-door me-2"></i> Inicio
+        </a>
+    </li>
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'estudiante_list' %}"> 
+                <i class="bi bi-people-fill me-2"></i> Estudiantes
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'curso_list' %}">
+                <i class="bi bi-journal-text me-2"></i> Cursos
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="{% url 'profesor_list' %}">
+                <i class="bi bi-person-badge me-2"></i> Profesores
+            </a>
+        </li>
+    {% endif %}
+</ul>
 
         <div class="user-info p-3 mt-auto border-top border-secondary">
             {% if user.is_authenticated %}
