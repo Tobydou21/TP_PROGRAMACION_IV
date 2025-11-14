@@ -295,6 +295,36 @@ Ver `.env.example` para todas las opciones disponibles.
 pip install -r requirements.txt
 ```
 
+Si al ejecutar `python manage.py migrate` recibes un error parecido a:
+
+```
+ModuleNotFoundError: No module named 'widget_tweaks'
+```
+significa que falta la dependencia `django-widget-tweaks` en el entorno virtual.
+
+Solución rápida:
+
+```powershell
+# Asegúrate de activar el entorno virtual
+.\.venv\Scripts\Activate.ps1
+# Instala la librería faltante
+pip install django-widget-tweaks
+# O reinstala todas las dependencias listadas
+pip install -r requirements.txt
+```
+
+Verifica que la librería quedó instalada:
+
+```powershell
+pip show django-widget-tweaks
+```
+
+Si aparece información del paquete, vuelve a ejecutar las migraciones:
+
+```powershell
+python manage.py migrate
+```
+
 ### Error: "port 8000 already in use"
 ```powershell
 python manage.py runserver 8001
